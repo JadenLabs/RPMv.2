@@ -1,12 +1,12 @@
 # RPMv.2
-## 7/17/2023
+**7/17/2023**
 
 # About
-This is one of my bigger coding projects that I'm tackling. By taking on some projects I am hoping to improve my coding and problem solving skills.
+This is one of the more significant coding projects that I'm tackling. I hope to improve my coding and problem-solving skills by taking on some projects.
 
 
 # Commands
-### Hideu
+### Hide
 **--hide-all**
 > Disables terminal input viewing for both password and key.
 **--hide-pass**
