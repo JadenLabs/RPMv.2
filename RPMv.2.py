@@ -27,6 +27,27 @@ class f:
     bottom = bl + l * h + br
 
 
+def help():
+    print(
+        f"""{f.top}
+{f.v}   Commands Help
+{f.v}   
+{f.v}   --help
+{f.v}    {f.bl} shows this page
+{f.v}
+{f.v}   --hide-all
+{f.v}    {f.bl} Disables terminal input viewing for both password and key.
+{f.v}
+{f.v}   --hide-pass
+{f.v}    {f.bl} Disables terminal input viewing for the password.
+{f.v}
+{f.v}   --hide-key
+{f.v}    {f.bl} Disables terminal input viewing for the key.
+{f.bottom}"""
+    )
+    sys.exit(0)
+
+
 def startup():
     print(
         f"""{f.top}
@@ -128,6 +149,8 @@ def main():
             hide = "Pass"
         elif "--hide-key" in sys.argv:
             hide = "Key"
+        elif "--help" in sys.argv:
+            help()
     except IndexError:
         pass
     promptUser(hide)
