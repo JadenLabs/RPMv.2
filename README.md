@@ -1,4 +1,4 @@
-# RPMv.2
+# Roc Password Manager v.2
 **7/17/2023**
 
 # About
