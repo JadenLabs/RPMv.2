@@ -61,33 +61,49 @@ def startup():
     )
 
 
+# Prompts the user for a master password
+def get_secure(key_type, hide, double):
+    checker_list = []
+
+    if double:
+        iterations = 2
+    else:
+        iterations = 1
+
+    for _ in range(iterations):
+        if hide:
+            secureValue = str(getpass(f"{f.v} {key_type}: "))
+            if secureValue == "":
+                print("ERRORx1: ValueError, Required field left blank.")
+                sys.exit(1)
+
+            checker_list.append(secureValue)
+        else:
+            secureValue = str(input(f"{f.v} {key_type}: "))
+            if secureValue == "":
+                print("ERRORx1: ValueError, Required field left blank.")
+                sys.exit(1)
+
+            checker_list.append(secureValue)
+
+    if iterations == 2:
+        if checker_list[0] == checker_list[1]:
+            return secureValue
+        else:
+            print("Double-checker failed.")
+            sys.exit(2)
+    else:
+        return secureValue
+
+
 # Prompts user for the master password and key
-def promptUser(hide):
+def promptUser(hide, double):
     global masterPassword, referenceKey, passwordLength, showPassword
 
     print(f.top)
 
-    if hide == "All" or hide == "Pass":
-        masterPassword = str(getpass(f"{f.v} Master Password: "))
-        if masterPassword == "":
-            print("ERRORx1: ValueError, Required field left blank.")
-            sys.exit(1)
-    else:
-        masterPassword = str(input(f"{f.v} Master Password: "))
-        if masterPassword == "":
-            print("ERRORx1: ValueError, Required field left blank.")
-            sys.exit(1)
-
-    if hide == "All" or hide == "Key":
-        referenceKey = str(getpass(f"{f.v} Reference Key: "))
-        if referenceKey == "":
-            print("ERRORx1: ValueError, Required field left blank.")
-            sys.exit(1)
-    else:
-        referenceKey = str(input(f"{f.v} Reference Key: "))
-        if referenceKey == "":
-            print("ERRORx1: ValueError, Required field left blank.")
-            sys.exit(1)
+    masterPassword = get_secure("Master Password", hide, double)
+    referenceKey = get_secure("Reference Key", hide, double)
 
     passwordLength = input(f"{f.v} Output Len: ")
     if passwordLength == "":
@@ -140,20 +156,24 @@ def main():
     # Displays a fancy startup message
     startup()
 
+    # sets defaults
+    hide = False
+    double = False
+
     # Checks arguments and gets user values
-    hide = "False"
-    try:
-        if "--hide-all" in sys.argv:
-            hide = "All"
-        elif "--hide-pass" in sys.argv:
-            hide = "Pass"
-        elif "--hide-key" in sys.argv:
-            hide = "Key"
-        elif "--help" in sys.argv:
-            help()
-    except IndexError:
-        pass
-    promptUser(hide)
+    for arg_index in sys.argv[1:]:
+        try:
+            if "--hide" in arg_index:
+                hide = True
+            elif "--help" in arg_index:
+                help()
+                break
+            elif "--double" in arg_index:
+                double = True
+        except IndexError:
+            pass
+
+    promptUser(hide, double)
 
     # Generates Password
     pw = generator((masterPassword + referenceKey), passwordLength)
