@@ -14,11 +14,10 @@ This is a storage-less password manager that generates passwords based on a mast
 > Displays the command help page.
 
 ### Hide
-**--hide-all**
-> Disables terminal input viewing for both password and key.
+**--hide**
+> Disables terminal echo when entering the master password and reference key.
 
-**--hide-pass**
-> Disables terminal input viewing for the password.
-
-**--hide-key**
-> Disables terminal input viewing for the key.
+### Double
+**--double**
+> Enables a double-checker when entering the master password and reference key.
+> ^ Helps avoid typos
