@@ -7,12 +7,13 @@ import hashlib
 from time import sleep
 import pyperclip as pc
 
-version = "2"
-name = f"RPMv.{version}.py"
+VERSION = 2
+name = f"RPMv.{VERSION}.py"
 
 
-# formatting
 class f:
+    """Contains variables used for formatting."""
+
     l = 30  # line len
 
     tl = "╭"
@@ -28,6 +29,9 @@ class f:
 
 
 def help_msg():
+    """Prints a list of commands arguments that
+    can be used with this script."""
+
     print(
         f"""{f.top}
 {f.v}   Commands Help
@@ -49,11 +53,13 @@ def help_msg():
 
 
 def startup():
+    """Prints a startup message."""
+
     print(
         f"""{f.top}
 {f.v}       ── Roc ────────
 {f.v}       Password Manager
-{f.v}       ──────── v.{version} ──
+{f.v}       ──────── v.{VERSION} ──
 {f.v}       
 {f.v}    * run {name} --help
 {f.v}    for additional options
@@ -61,8 +67,10 @@ def startup():
     )
 
 
-# Prompts the user for a master password
 def get_secure(key_type, hide, double):
+    """Function for prompting and getting secure values,
+    dynamic based on function inputs."""
+
     checker_list = []
 
     if double:
@@ -96,8 +104,9 @@ def get_secure(key_type, hide, double):
         return secureValue
 
 
-# Prompts user for the master password and key
 def promptUser(hide, double):
+    """Prompts the user for values used by the rest of the script."""
+
     global masterPassword, referenceKey, passwordLength, showPassword
 
     print(f.top)
@@ -130,6 +139,8 @@ def promptUser(hide, double):
 
 
 def generator(seed, length):
+    """Generates a password based on the values passed to this function."""
+
     random.seed(seed)
 
     characters = (
@@ -153,6 +164,8 @@ def generator(seed, length):
 
 
 def main():
+    """The core of the code, this function is ran first."""
+
     # Displays a fancy startup message
     startup()
 
