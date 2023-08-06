@@ -27,7 +27,7 @@ class f:
     bottom = bl + l * h + br
 
 
-def help():
+def help_msg():
     print(
         f"""{f.top}
 {f.v}   Commands Help
@@ -166,7 +166,7 @@ def main():
             if "--hide" in arg_index:
                 hide = True
             elif "--help" in arg_index:
-                help()
+                help_msg()
                 break
             elif "--double" in arg_index:
                 double = True
