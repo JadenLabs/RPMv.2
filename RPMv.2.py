@@ -163,29 +163,10 @@ def generator(seed, length):
     return password
 
 
-def main():
-    """The core of the code, this function is ran first."""
+def rpm(hide: bool, double: bool):
+    """The core of the code."""
 
-    # Displays a fancy startup message
-    startup()
-
-    # sets defaults
-    hide = False
-    double = False
-
-    # Checks arguments and gets user values
-    for arg_index in sys.argv[1:]:
-        try:
-            if "--hide" in arg_index:
-                hide = True
-            elif "--help" in arg_index:
-                help_msg()
-                break
-            elif "--double" in arg_index:
-                double = True
-        except IndexError:
-            pass
-
+    # Prompts the user for values
     promptUser(hide, double)
 
     # Generates Password
@@ -209,4 +190,24 @@ def main():
         sys.exit(0)
 
 
-main()
+if __name__ == "__main__":
+    startup()
+
+    # Sets Defaults
+    hideInput = False
+    doubleAsk = False
+
+    # Checks arguments and gets user values
+    for arg_index in sys.argv[1:]:
+        try:
+            if "--hide" in arg_index:
+                hideInput = True
+            elif "--help" in arg_index:
+                help_msg()
+                break
+            elif "--double" in arg_index:
+                doubleAsk = True
+        except IndexError:
+            pass
+
+    rpm(hideInput, doubleAsk)
