@@ -1,5 +1,7 @@
+rich
+time
 random
+pyyaml
 getpass
 hashlib
-time
 pyperclip
