@@ -2,7 +2,6 @@
 **7/17/2023**
 
 # About
-> What is this?
 
 This is a storage-less password manager that generates passwords based on a master password and a reference key. Then it outputs a password to the length specified.
 
